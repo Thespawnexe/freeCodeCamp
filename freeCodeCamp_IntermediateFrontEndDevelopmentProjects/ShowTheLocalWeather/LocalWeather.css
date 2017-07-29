@@ -2,3 +2,18 @@ footer {
     background-color: black;
     color: whitesmoke;
 }
+
+.weatherSidebar {
+    background-color: #dbdfe5; 
+    
+}
+
+.contentHeight {
+    min-height: 300px; 
+    height: 100%;
+}
+
+.weatherScene {
+ background-color: #abb1b8;
+
+}
