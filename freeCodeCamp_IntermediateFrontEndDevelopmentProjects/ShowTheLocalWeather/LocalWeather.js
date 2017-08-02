@@ -3,8 +3,11 @@ var forismaticURL = "https://api.forismatic.com/api/1.0/?method=getQuote&lang=en
 
 
 $(document).ready(function() {
+    $.ajaxSetup({ cache: false });
+   
+      //showQuote();    
     
-    scrollingQuote();
+    
     getLocation();
 
     function getWeatherInfo(latitude, longitude) {
@@ -34,20 +37,33 @@ $(document).ready(function() {
             $("#testArea").html("temp: " + temp + " windSpeed: " + windSpeed + " Weather: " + weatherMain + " Description: " + weatherDescription
                 + " icon: " + "<img src=" + weatherIcon + ">" + " Country: " + country + " City: " + cityName);
         }); 
-
+      
     };
 
-
-    function scrollingQuote() {
-   
+    //on hold $('.marquee').marquee();
+    
+    
+    /*
+    function showQuote() {
+        $("#scrolling-quote").html("")
+            .show("slide", { direction: "right" }, 100)
+            .hide("slide", { direction: "left" }, 100);
         $.getJSON(forismaticURL, function(data) {
             var quote = data.quoteText;
-            var author = data.quoteAuthor;
-            $("header").html(quote + " - " + author);
-      
-        });
-
+            var author = data.quoteAuthor;    
+            var fullQuote = quote + " - " + author;
+        
+        $("#scrolling-quote").html(fullQuote)
+        .show("slide", { direction: "right" }, 10000)
+        .hide("slide", { direction: "left" }, 10000);
+              
+        }); 
+        setTimeout(
+            $("scrolling-quote").
+            , 5000); 
+        
     }
+*/
     function getLocation() {
         
         if (navigator.geolocation) {

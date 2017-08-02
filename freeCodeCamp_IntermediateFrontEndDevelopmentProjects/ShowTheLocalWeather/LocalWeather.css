@@ -2,6 +2,11 @@ footer {
     background-color: black;
     color: whitesmoke;
 }
+header {
+    height: 30px;
+    background-color: black;
+    padding: 2% 0;
+}
 
 .weatherSidebar {
     background-color: #dbdfe5; 
@@ -16,4 +21,9 @@ footer {
 .weatherScene {
  background-color: #abb1b8;
 
+}
+.marquee {
+    color: white;
+    overflow: hidden;
+    border:1px solid #ccc;
 }
