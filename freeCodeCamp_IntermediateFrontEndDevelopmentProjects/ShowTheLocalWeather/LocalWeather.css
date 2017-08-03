@@ -1,6 +1,7 @@
 footer {
     background-color: black;
     color: whitesmoke;
+    height: 20vw;
 }
 header {
     height: 30px;
@@ -8,22 +9,29 @@ header {
     padding: 2% 0;
 }
 
-.weatherSidebar {
+#weather-sidebar {
     background-color: #dbdfe5; 
     
 }
 
-.contentHeight {
+#weather-scene {
+ background-color: #191970;
+
+}
+.content-height {
     min-height: 300px; 
     height: 100%;
 }
 
-.weatherScene {
- background-color: #abb1b8;
-
-}
 .marquee {
     color: white;
     overflow: hidden;
     border:1px solid #ccc;
 }
+
+/* 
+SkyBlue2: #7ec0ee - sunny 
+SkyBlue4: #4a708b - cloudy
+MidnightBlue: #191970 - night
+
+*/

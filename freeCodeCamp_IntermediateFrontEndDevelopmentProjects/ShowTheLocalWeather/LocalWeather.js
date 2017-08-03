@@ -15,27 +15,44 @@ $(document).ready(function() {
         $("span").text(weatherInfoURL);       
         $.get(weatherInfoURL, function(data) {
             // weather
-            var weatherMain = data.weather[0].main;
-            var weatherDescription = data.weather[0].description;
-            var weatherIcon = data.weather[0].icon;
-            // temperature
-            var temp = data.main.temp;
-            var humidity = data.main.humidity;
-            var tempMin = data.main.temp_min;
-            var tempMax = data.main.temp_max;
+            var weatherMain = data.weather[0].main; //might or might not need.
+            var weatherDescription = data.weather[0].description; //done
+            var weatherIcon = data.weather[0].icon; //done
+            // main
+            var temp = data.main.temp; //done
+            var humidity = data.main.humidity; //done
+            var tempMin = data.main.temp_min; //done
+            var tempMax = data.main.temp_max; //done
             // wind
-            var windSpeed = data.wind.speed;
-            var windDeg = data.wind.deg;
+            var windSpeed = data.wind.speed; //done
+            var windDeg = data.wind.deg; //done
             //sys 
-            var message = data.sys.message; // i don't know what this does or means.
-            var country = data.sys.country;
-            var sunrise = data.sys.sunrise;
-            var sunset = data.sys.sunset;
-            var cityName = data.name;
+            var country = data.sys.country; //done
+            var sunrise = data.sys.sunrise; //done
+            var sunset = data.sys.sunset; //done
+            var cityName = data.name; //done
 
             // Display the returned data in browser
-            $("#testArea").html("temp: " + temp + " windSpeed: " + windSpeed + " Weather: " + weatherMain + " Description: " + weatherDescription
-                + " icon: " + "<img src=" + weatherIcon + ">" + " Country: " + country + " City: " + cityName);
+            $("#weather-sidebar").html(
+                " City: " + cityName +
+                " Country: " + country + 
+                "</br>" + 
+                " icon: " + "<img src=" + weatherIcon + ">" +
+                "temp: " + temp + 
+                "</br>" +
+                " Description: " + weatherDescription +
+                "</br>" + 
+                " temp max: " + tempMax +
+                " temp min: " + tempMin +
+                " Humidity: " + humidity +
+                "</br>" + 
+                "WindDeg:" + windDeg + 
+                " windSpeed: " + windSpeed +
+                "</br>" + 
+                "Sunrise: " + sunrise +
+                "Sunset: " + sunset
+                               
+            );
         }); 
       
     };
