@@ -31,7 +31,7 @@ $(document).ready(function() {
             var sunrise = data.sys.sunrise; //done
             var sunset = data.sys.sunset; //done
             var cityName = data.name; //done
-
+            //displayWeatherScene(weatherMain);
             // Display the returned data in browser
             $("#weather-sidebar").html(
                 " City: " + cityName +
@@ -93,4 +93,14 @@ $(document).ready(function() {
     
     }
 
+    function displayWeatherScene(weatherMain) {
+        
+        switch(weatherMain) {
+            case "Clear":    
+            $('<img class="weather-scene-styling" src="sun.svg">').appendTo($("#weather-scene"));
+            break;
+            default:
+            $("#weather-scene").html("COME BACK FOR IT LATER..go get me a burger.");
+        }
+    }
 });

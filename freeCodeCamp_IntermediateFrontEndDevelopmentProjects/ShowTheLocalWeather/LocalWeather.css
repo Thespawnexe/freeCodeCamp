@@ -16,6 +16,7 @@ header {
 
 #weather-scene {
  background-color: #191970;
+ color: white;
 
 }
 .content-height {
@@ -27,6 +28,9 @@ header {
     color: white;
     overflow: hidden;
     border:1px solid #ccc;
+}
+.weather-scene-styling {
+    width: 200px;
 }
 
 /* 
