@@ -1,6 +1,6 @@
 
 var forismaticURL = "https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?"
-
+var sun = '<img class="weather-scene-styling" src="projectArt/sun.svg">';
 
 $(document).ready(function() {
     $.ajaxSetup({ cache: false });
@@ -12,7 +12,8 @@ $(document).ready(function() {
 
     function getWeatherInfo(latitude, longitude) {
         var weatherInfoURL = "https://fcc-weather-api.glitch.me/api/current?lat=" + latitude + "&lon=" + longitude;
-        $("span").text(weatherInfoURL);       
+        
+
         $.get(weatherInfoURL, function(data) {
             // weather
             var weatherMain = data.weather[0].main; //might or might not need.
@@ -31,7 +32,7 @@ $(document).ready(function() {
             var sunrise = data.sys.sunrise; //done
             var sunset = data.sys.sunset; //done
             var cityName = data.name; //done
-            //displayWeatherScene(weatherMain);
+            displayWeatherScene(weatherMain);
             // Display the returned data in browser
             $("#weather-sidebar").html(
                 " City: " + cityName +
@@ -51,8 +52,9 @@ $(document).ready(function() {
                 "</br>" + 
                 "Sunrise: " + sunrise +
                 "Sunset: " + sunset
-                               
+                                   
             );
+            $("span").text(weatherInfoURL + "weatherMain is: " + weatherMain); //test area - remove when done.
         }); 
       
     };
@@ -97,10 +99,15 @@ $(document).ready(function() {
         
         switch(weatherMain) {
             case "Clear":    
-            $('<img class="weather-scene-styling" src="sun.svg">').appendTo($("#weather-scene"));
-            break;
+                $("#weather-scene").html('<img src="projectArt/sun.svg">');              
+                $("#weather-scene").css({ "background-color": "#7ec0ee", "height" : "inherit"});
+                break;
+            case "Clouds":    
+                $("#weather-scene").html('<img src="projectArt/cloud.svg">');
+                $("#weather-scene").css({ "background-color": "#4a708b", "max-width" : "300px"});
+                break;
             default:
-            $("#weather-scene").html("COME BACK FOR IT LATER..go get me a burger.");
+            $("#weather-scene").html("COME BACK FOR YOUR WEATHER FIX LATER..go get a burger.");
         }
     }
 });

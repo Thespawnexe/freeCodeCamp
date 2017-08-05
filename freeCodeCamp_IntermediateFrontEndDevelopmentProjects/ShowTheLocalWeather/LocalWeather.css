@@ -17,21 +17,12 @@ header {
 #weather-scene {
  background-color: #191970;
  color: white;
+ 
 
 }
-.content-height {
-    min-height: 300px; 
-    height: 100%;
-}
 
-.marquee {
-    color: white;
-    overflow: hidden;
-    border:1px solid #ccc;
-}
-.weather-scene-styling {
-    width: 200px;
-}
+
+
 
 /* 
 SkyBlue2: #7ec0ee - sunny 
