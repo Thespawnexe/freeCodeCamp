@@ -38,7 +38,7 @@ $(document).ready(function() {
                 " City: " + cityName +
                 " Country: " + country + 
                 "</br>" + 
-                " icon: " + "<img src=" + weatherIcon + ">" +
+                " icon: " + "<img src=" + weatherIcon + " alt='Weather Icon ' align='middle'>" +
                 "temp: " + temp + 
                 "</br>" +
                 " Description: " + weatherDescription +
@@ -99,12 +99,16 @@ $(document).ready(function() {
         
         switch(weatherMain) {
             case "Clear":    
-                $("#weather-scene").html('<img src="projectArt/sun.svg">');              
-                $("#weather-scene").css({ "background-color": "#7ec0ee", "height" : "inherit"});
+                $("#weather-scene").html("<img src='projectArt/sun.svg'>");              
+                $("#weather-scene").css({ "background-color": "#7ec0ee"});
                 break;
             case "Clouds":    
-                $("#weather-scene").html('<img src="projectArt/cloud.svg">');
-                $("#weather-scene").css({ "background-color": "#4a708b", "max-width" : "300px"});
+                $("#weather-scene").html("<img src='projectArt/cloud.svg'>");
+                $("#weather-scene").css({ "background-color": "#4a708b"});
+                break;
+            case "Haze":    
+                $("#weather-scene").html("<img src='projectArt/cloud.svg'>");
+                $("#weather-scene").css({ "background-color": "#4a708b"});
                 break;
             default:
             $("#weather-scene").html("COME BACK FOR YOUR WEATHER FIX LATER..go get a burger.");

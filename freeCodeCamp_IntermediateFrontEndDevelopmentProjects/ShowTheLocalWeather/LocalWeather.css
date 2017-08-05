@@ -9,19 +9,22 @@ header {
     padding: 2% 0;
 }
 
+#weather-sidebar , #weather-scene {
+    height: 400px;
+}
 #weather-sidebar {
-    background-color: #dbdfe5; 
-    
+    background: linear-gradient(235deg, #191970 0, #7ec0ee 100%);
+    color: orangered;
 }
 
 #weather-scene {
- background-color: #191970;
- color: white;
- 
-
+    background-color: #191970;
+    color: white;
 }
 
-
+#weather-scene img {
+    width: 400px;    
+}
 
 
 /* 
