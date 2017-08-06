@@ -13,8 +13,7 @@ header {
     height: 400px;
 }
 #weather-sidebar {
-    background: linear-gradient(235deg, #191970 0, #7ec0ee 100%);
-    color: orangered;
+    background: linear-gradient(200deg, #191970 0, #7ec0ee 100%);
 }
 
 #weather-scene {
@@ -24,6 +23,14 @@ header {
 
 #weather-scene img {
     width: 400px;    
+}
+.date-time {
+    color: orange;
+    font-size: 1.2em;
+    padding: 4% 0;
+}
+.weather-data {
+    color: orangered;
 }
 
 

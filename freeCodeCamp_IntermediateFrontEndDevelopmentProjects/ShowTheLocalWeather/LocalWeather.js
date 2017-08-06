@@ -7,8 +7,8 @@ $(document).ready(function() {
    
       //showQuote();    
     
-    
     getLocation();
+    getDateTime();
 
     function getWeatherInfo(latitude, longitude) {
         var weatherInfoURL = "https://fcc-weather-api.glitch.me/api/current?lat=" + latitude + "&lon=" + longitude;
@@ -29,12 +29,13 @@ $(document).ready(function() {
             var windDeg = data.wind.deg; //done
             //sys 
             var country = data.sys.country; //done
-            var sunrise = data.sys.sunrise; //done
-            var sunset = data.sys.sunset; //done
+            var sunrise = new Date (data.sys.sunrise); //done
+            var sunset = new Date(data.sys.sunset); //done
             var cityName = data.name; //done
             displayWeatherScene(weatherMain);
+           
             // Display the returned data in browser
-            $("#weather-sidebar").html(
+            $(".weather-data").html(
                 " City: " + cityName +
                 " Country: " + country + 
                 "</br>" + 
@@ -114,4 +115,17 @@ $(document).ready(function() {
             $("#weather-scene").html("COME BACK FOR YOUR WEATHER FIX LATER..go get a burger.");
         }
     }
-});
+
+    function getDateTime () {
+        var weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        
+        var today = new Date();
+        var weekday = weekDays[today.getDay()];
+        
+        var date = weekday + ' ' + today.getFullYear() + '/' + (today.getMonth()+1) + '/' + today.getDate();
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        var dateTime = date + ' ' + time; 
+        $(".date-time").text(dateTime);
+    }
+
+}); 
