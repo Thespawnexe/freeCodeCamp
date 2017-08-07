@@ -60,9 +60,7 @@ $(document).ready(function() {
       
     };
 
-    //on hold $('.marquee').marquee();
-    
-    
+        
     /*
     function showQuote() {
         $("#scrolling-quote").html("")
@@ -118,12 +116,35 @@ $(document).ready(function() {
 
     function getDateTime () {
         var weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+
         var today = new Date();
+        //date vars
         var weekday = weekDays[today.getDay()];
+        var year = today.getFullYear();
+        var month = months[today.getMonth()];
+        var day = today.getDate();
+        //time vars
+        var hour = today.getHours();
+        var minutes = today.getMinutes();
+        var ampm = ''; 
         
-        var date = weekday + ' ' + today.getFullYear() + '/' + (today.getMonth()+1) + '/' + today.getDate();
-        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        if (day < 10) {
+            day = '0' + day;
+        }
+
+        if (minutes < 10) {
+            minutes = '0' + minutes;
+        }
+
+        if (hour > 11 ) {
+            ampm = ampm + ' PM';
+        } else {
+            ampm = ampm + ' AM';
+        }
+
+        var date = weekday + ' ' + month + ', ' + day + ' ' + year;
+        var time = hour + ":" + minutes + ' ' + ampm;
         var dateTime = date + ' ' + time; 
         $(".date-time").text(dateTime);
     }
