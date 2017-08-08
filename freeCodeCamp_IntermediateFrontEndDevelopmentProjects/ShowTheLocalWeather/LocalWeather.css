@@ -13,7 +13,7 @@ header {
     height: 400px;
 }
 #weather-sidebar {
-    background: linear-gradient(180deg, #191970 0, #7ec0ee 20%);
+    background: linear-gradient(180deg, #191970 0, #4a708b 20%);
 }
 
 #weather-scene {

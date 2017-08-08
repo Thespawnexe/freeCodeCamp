@@ -29,11 +29,15 @@ $(document).ready(function() {
             var windDeg = data.wind.deg; //done
             //sys 
             var country = data.sys.country; //done
-            var sunrise = new Date (data.sys.sunrise); //done
-            var sunset = new Date(data.sys.sunset); //done
+            var sunriseUTC = new Date(data.sys.sunrise * 1000); //done
+            var sunsetUTC = new Date(data.sys.sunset * 1000); //done            
             var cityName = data.name; //done
-            displayWeatherScene(weatherMain);
-           
+
+            sunrise = sunriseUTC.getHours() + ' ' + sunriseUTC.getMinutes();    
+            sunset = sunsetUTC.getHours() + ' ' + sunsetUTC.getMinutes();
+            
+            displayWeatherScene(weatherMain, sunriseUTC, sunsetUTC);
+        
             // Display the returned data in browser
             $(".weather-data").html(
                 " City: " + cityName +
@@ -51,9 +55,8 @@ $(document).ready(function() {
                 "WindDeg:" + windDeg + 
                 " windSpeed: " + windSpeed +
                 "</br>" + 
-                "Sunrise: " + sunrise +
-                "Sunset: " + sunset
-                                   
+                "Sunrise: " + sunrise + ' AM' +
+                " Sunset: " + sunset + ' PM'                    
             );
             $("span").text(weatherInfoURL + "weatherMain is: " + weatherMain); //test area - remove when done.
         }); 
@@ -94,8 +97,19 @@ $(document).ready(function() {
     
     }
 
-    function displayWeatherScene(weatherMain) {
+    function displayWeatherScene(weatherMain, sunriseUTC, sunsetUTC) {
+        var timeCompare = new Date();
+
+        if (timeCompare >= sunriseUTC) {
+            $("#weather-scene").html("<img src='projectArt/sun.svg'>");              
+            $("#weather-scene").css({ "background-color": "#7ec0ee"});            
+        } else {
+            $("#weather-scene").html("<img src='projectArt/full-moon.svg'>");              
+            $("#weather-scene").css({ "background-color": "#191970"});
+        }
         
+
+        /*
         switch(weatherMain) {
             case "Clear":    
                 $("#weather-scene").html("<img src='projectArt/sun.svg'>");              
@@ -111,7 +125,9 @@ $(document).ready(function() {
                 break;
             default:
             $("#weather-scene").html("COME BACK FOR YOUR WEATHER FIX LATER..go get a burger.");
+        
         }
+        */
     }
 
     function getDateTime () {
