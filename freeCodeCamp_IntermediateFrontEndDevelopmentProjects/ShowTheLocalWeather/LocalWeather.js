@@ -33,27 +33,36 @@ $(document).ready(function() {
             var sunsetUTC = new Date(data.sys.sunset * 1000); //done            
             var cityName = data.name; //done
 
-            sunrise = sunriseUTC.getHours() + ' ' + sunriseUTC.getMinutes();    
-            sunset = sunsetUTC.getHours() + ' ' + sunsetUTC.getMinutes();
+            sunrise = sunriseUTC.getHours() + ':' + sunriseUTC.getMinutes();    
+            sunset = sunsetUTC.getHours() + ':' + sunsetUTC.getMinutes();
+            
+            var tempFC = "F";
+            
+            /*$("button").onClick(function(){
+                //finish function
+                if ()
+            });*/
             
             displayWeatherScene(weatherMain, sunriseUTC, sunsetUTC);
-        
+            
+            
             // Display the returned data in browser
             $(".weather-data").html(
-                " City: " + cityName +
-                " Country: " + country + 
+                cityName +
+                ", " + country + 
                 "</br>" + 
-                " icon: " + "<img src=" + weatherIcon + " alt='Weather Icon ' align='middle'>" +
-                "temp: " + temp + 
+                "<button>C / F</button> " + temp + "° " + tempFC +
+                "<img src=" + weatherIcon + " alt='Weather Icon ' align='middle'>" +
                 "</br>" +
-                " Description: " + weatherDescription +
+                weatherDescription.toUpperCase() +
                 "</br>" + 
-                " temp max: " + tempMax +
-                " temp min: " + tempMin +
-                " Humidity: " + humidity +
+                " temp max - " + tempMax + "° " + tempFC +
+                " temp min - " + tempMin + "° " + tempFC +
                 "</br>" + 
-                "WindDeg:" + windDeg + 
-                " windSpeed: " + windSpeed +
+                " Humidity - " + humidity +
+                "</br>" + 
+                "WindDeg: " + windDeg + 
+                " wind Speed: " + windSpeed +
                 "</br>" + 
                 "Sunrise: " + sunrise + ' AM' +
                 " Sunset: " + sunset + ' PM'                    
@@ -63,28 +72,6 @@ $(document).ready(function() {
       
     };
 
-        
-    /*
-    function showQuote() {
-        $("#scrolling-quote").html("")
-            .show("slide", { direction: "right" }, 100)
-            .hide("slide", { direction: "left" }, 100);
-        $.getJSON(forismaticURL, function(data) {
-            var quote = data.quoteText;
-            var author = data.quoteAuthor;    
-            var fullQuote = quote + " - " + author;
-        
-        $("#scrolling-quote").html(fullQuote)
-        .show("slide", { direction: "right" }, 10000)
-        .hide("slide", { direction: "left" }, 10000);
-              
-        }); 
-        setTimeout(
-            $("scrolling-quote").
-            , 5000); 
-        
-    }
-*/
     function getLocation() {
         
         if (navigator.geolocation) {
@@ -132,7 +119,7 @@ $(document).ready(function() {
 
     function getDateTime () {
         var weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+        var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
         var today = new Date();
         //date vars
@@ -159,10 +146,33 @@ $(document).ready(function() {
             ampm = ampm + ' AM';
         }
 
-        var date = weekday + ' ' + month + ', ' + day + ' ' + year;
+        var date = weekday + ' - ' + month + ', ' + day + ' ' + year;
         var time = hour + ":" + minutes + ' ' + ampm;
         var dateTime = date + ' ' + time; 
         $(".date-time").text(dateTime);
     }
+
+            
+    /*
+    function showQuote() {
+        $("#scrolling-quote").html("")
+            .show("slide", { direction: "right" }, 100)
+            .hide("slide", { direction: "left" }, 100);
+        $.getJSON(forismaticURL, function(data) {
+            var quote = data.quoteText;
+            var author = data.quoteAuthor;    
+            var fullQuote = quote + " - " + author;
+        
+        $("#scrolling-quote").html(fullQuote)
+        .show("slide", { direction: "right" }, 10000)
+        .hide("slide", { direction: "left" }, 10000);
+              
+        }); 
+        setTimeout(
+            $("scrolling-quote").
+            , 5000); 
+        
+    }
+*/
 
 }); 
