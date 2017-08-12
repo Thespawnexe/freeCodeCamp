@@ -8,11 +8,13 @@ $(document).ready(function() {
       //showQuote();    
     
     getLocation();
-    getDateTime();
+    
 
     function getWeatherInfo(latitude, longitude) {
         var weatherInfoURL = "https://fcc-weather-api.glitch.me/api/current?lat=" + latitude + "&lon=" + longitude;
         
+        $(".buttonF").html("<button>°F</button>");
+        $(".buttonC").html("<button>°C</button>");
 
         $.get(weatherInfoURL, function(data) {
             // weather
@@ -20,10 +22,10 @@ $(document).ready(function() {
             var weatherDescription = data.weather[0].description; //done
             var weatherIcon = data.weather[0].icon; //done
             // main
-            var temp = data.main.temp; //done
+            var temp = Math.floor(9/5 * data.main.temp + 32); // 
             var humidity = data.main.humidity; //done
-            var tempMin = data.main.temp_min; //done
-            var tempMax = data.main.temp_max; //done
+            var tempMin = Math.floor(9/5 * data.main.temp_min + 32); //done
+            var tempMax = Math.floor(9/5 * data.main.temp_max + 32); //done
             // wind
             var windSpeed = data.wind.speed; //done
             var windDeg = data.wind.deg; //done
@@ -35,38 +37,52 @@ $(document).ready(function() {
 
             sunrise = sunriseUTC.getHours() + ':' + sunriseUTC.getMinutes();    
             sunset = sunsetUTC.getHours() + ':' + sunsetUTC.getMinutes();
+            var tempFC = "F";        
             
-            var tempFC = "F";
-            
-            /*$("button").onClick(function(){
-                //finish function
-                if ()
-            });*/
-            
+            $(".buttonF").click(function() {
+                temp = Math.floor(9/5 * data.main.temp + 32);
+                tempMin = Math.floor(9/5 * data.main.temp_min + 32);
+                tempMax = Math.floor(9/5 * data.main.temp_max + 32);
+                tempFC = "F";
+                $(".main-temp").html("<div class='main-temp'>" + temp + "° " + tempFC + "</div>" );
+                $(".temp-min-max").html("<div class='temp-min-max'>" + tempMax + "° " + tempFC +
+                " / " + tempMin + "° " + tempFC + "</div>");
+            });
+
+            $(".buttonC").click(function() {
+                temp = Math.floor(data.main.temp);
+                tempMin = Math.floor(data.main.temp_min);
+                tempMax = Math.floor(data.main.temp_max);
+                tempFC = "C";
+                $(".main-temp").html("<div class='main-temp'>" + temp + "° " + tempFC + "</div>" );
+                $(".temp-min-max").html("<div class='temp-min-max'>" + tempMax + "° " + tempFC +
+                " / " + tempMin + "° " + tempFC + "</div>");
+            });
+
+            getDateTime(cityName, country);
             displayWeatherScene(weatherMain, sunriseUTC, sunsetUTC);
             
-            
             // Display the returned data in browser
+            
             $(".weather-data").html(
-                cityName +
-                ", " + country + 
-                "</br>" + 
-                "<button>C / F</button> " + temp + "° " + tempFC +
-                "<img src=" + weatherIcon + " alt='Weather Icon ' align='middle'>" +
-                "</br>" +
-                weatherDescription.toUpperCase() +
-                "</br>" + 
-                " temp max - " + tempMax + "° " + tempFC +
-                " temp min - " + tempMin + "° " + tempFC +
-                "</br>" + 
-                " Humidity - " + humidity +
-                "</br>" + 
-                "WindDeg: " + windDeg + 
-                " wind Speed: " + windSpeed +
-                "</br>" + 
-                "Sunrise: " + sunrise + ' AM' +
-                " Sunset: " + sunset + ' PM'                    
+                "<ul><li><div class='main-temp'>" + temp + "° " + tempFC + 
+                  
+                "</div><img src=" + weatherIcon + " alt='Weather Icon ' align='middle'></li>" +
+                 
+                "<li><div class='temp-min-max'>" + tempMax + "° " + tempFC +
+                " / " + tempMin + "° " + tempFC + "</div></li>" +
+                "<li>" + weatherDescription.toUpperCase() + "</li>" +
+                 
+                 
+                "<li> Humidity - " + humidity + "%" + "</li>" +
+                 
+                "<li>WindDeg: " + windDeg + 
+                " wind Speed: " + windSpeed + "</li>" +
+                 
+                "<li>Sunrise: " + sunrise + ' AM' +
+                " Sunset: " + sunset + ' PM' + "</li></ul>"                    
             );
+
             $("span").text(weatherInfoURL + "weatherMain is: " + weatherMain); //test area - remove when done.
         }); 
       
@@ -117,7 +133,7 @@ $(document).ready(function() {
         */
     }
 
-    function getDateTime () {
+    function getDateTime (cityName, country) {
         var weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -149,7 +165,7 @@ $(document).ready(function() {
         var date = weekday + ' - ' + month + ', ' + day + ' ' + year;
         var time = hour + ":" + minutes + ' ' + ampm;
         var dateTime = date + ' ' + time; 
-        $(".date-time").text(dateTime);
+        $(".date-time").html(cityName + ", " + country + "</br>" + dateTime);
     }
 
             

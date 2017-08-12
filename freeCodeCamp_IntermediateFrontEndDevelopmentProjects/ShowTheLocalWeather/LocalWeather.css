@@ -1,19 +1,21 @@
+
+header {
+    height: 40px;
+    background-color: black;
+    padding: 2% 0;
+}
+
 footer {
     background-color: black;
     color: whitesmoke;
     height: 20vw;
 }
-header {
-    height: 30px;
-    background-color: black;
-    padding: 2% 0;
-}
 
-#weather-sidebar , #weather-scene {
-    height: 500px;
+#weather-sidebar, #weather-scene {
+    height: 600px;
 }
 #weather-sidebar {
-    background: linear-gradient(180deg, #191970 0, #4a708b 20%);
+    background: linear-gradient(180deg, #191970 0, #4a708b 30%);
 }
 
 #weather-scene {
@@ -22,7 +24,7 @@ header {
 }
 
 #weather-scene img {
-    width: 500px;    
+    width: 600px;    
 }
 .date-time {
     color: orange;
@@ -39,8 +41,23 @@ header {
 button {
     background-color: black;
     border: 1px solid grey;
+    color: white;
+}
+.buttonC, .buttonF {
+    padding: 0 50%;
 }
 
+ul {
+    list-style: none;
+}
+.main-temp {
+    color: orange;
+    font-size: 6vh;
+}
+.temp-min-max {
+    color: orange;
+    font-size: 3vh;
+}
 
 /* 
 SkyBlue2: #7ec0ee - sunny 
