@@ -1,14 +1,10 @@
 
 var forismaticURL = "https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?"
-var sun = '<img class="weather-scene-styling" src="projectArt/sun.svg">';
 
 $(document).ready(function() {
     $.ajaxSetup({ cache: false });
-   
-      //showQuote();    
     
     getLocation();
-    
 
     function getWeatherInfo(latitude, longitude) {
         var weatherInfoURL = "https://fcc-weather-api.glitch.me/api/current?lat=" + latitude + "&lon=" + longitude;
@@ -19,21 +15,18 @@ $(document).ready(function() {
         $.get(weatherInfoURL, function(data) {
             // weather
             var weatherMain = data.weather[0].main; //might or might not need.
-            var weatherDescription = data.weather[0].description; //done
-            var weatherIcon = data.weather[0].icon; //done
+            var weatherDescription = data.weather[0].description; 
+            var weatherIcon = data.weather[0].icon; 
             // main
-            var temp = Math.floor(9/5 * data.main.temp + 32); // 
-            var humidity = data.main.humidity; //done
-            var tempMin = Math.floor(9/5 * data.main.temp_min + 32); //done
-            var tempMax = Math.floor(9/5 * data.main.temp_max + 32); //done
-            // wind
-            var windSpeed = data.wind.speed; //done
-            var windDeg = data.wind.deg; //done
+            var temp = Math.floor(9/5 * data.main.temp + 32);  
+            var humidity = data.main.humidity; 
+            var tempMin = Math.floor(9/5 * data.main.temp_min + 32); 
+            var tempMax = Math.floor(9/5 * data.main.temp_max + 32); 
             //sys 
-            var country = data.sys.country; //done
-            var sunriseUTC = new Date(data.sys.sunrise * 1000); //done
-            var sunsetUTC = new Date(data.sys.sunset * 1000); //done            
-            var cityName = data.name; //done
+            var country = data.sys.country;
+            var sunriseUTC = new Date(data.sys.sunrise * 1000); 
+            var sunsetUTC = new Date(data.sys.sunset * 1000);             
+            var cityName = data.name; 
 
             sunrise = sunriseUTC.getHours() + ':' + sunriseUTC.getMinutes();    
             sunset = sunsetUTC.getHours() + ':' + sunsetUTC.getMinutes();
@@ -45,7 +38,7 @@ $(document).ready(function() {
                 tempMax = Math.floor(9/5 * data.main.temp_max + 32);
                 tempFC = "F";
                 $(".main-temp").html("<div class='main-temp'>" + temp + "° " + tempFC + "</div>" );
-                $(".temp-min-max").html("<div class='temp-min-max'>" + tempMax + "° " + tempFC +
+                $(".temperature-min-max").html("<div class='temperature-min-max'>" + tempMax + "° " + tempFC +
                 " / " + tempMin + "° " + tempFC + "</div>");
             });
 
@@ -55,7 +48,7 @@ $(document).ready(function() {
                 tempMax = Math.floor(data.main.temp_max);
                 tempFC = "C";
                 $(".main-temp").html("<div class='main-temp'>" + temp + "° " + tempFC + "</div>" );
-                $(".temp-min-max").html("<div class='temp-min-max'>" + tempMax + "° " + tempFC +
+                $(".temperature-min-max").html("<div class='temperature-min-max'>" + tempMax + "° " + tempFC +
                 " / " + tempMin + "° " + tempFC + "</div>");
             });
 
@@ -65,27 +58,16 @@ $(document).ready(function() {
             // Display the returned data in browser
             
             $(".weather-data").html(
-                "<ul><li><div class='main-temp'>" + temp + "° " + tempFC + 
-                  
+                "<ul><li><div class='main-temp'>" + temp + "° " + tempFC +                 
                 "</div><img src=" + weatherIcon + " alt='Weather Icon ' align='middle'></li>" +
-                 
-                "<li><div class='temp-min-max'>" + tempMax + "° " + tempFC +
+                "<li><div class='temperature-min-max'>" + tempMax + "° " + tempFC +
                 " / " + tempMin + "° " + tempFC + "</div></li>" +
                 "<li>" + weatherDescription.toUpperCase() + "</li>" +
-                 
-                 
-                "<li> Humidity - " + humidity + "%" + "</li>" +
-                 
-                "<li>WindDeg: " + windDeg + 
-                " wind Speed: " + windSpeed + "</li>" +
-                 
+                "<li> Humidity: " + humidity + "%" + "</li>" +                  
                 "<li>Sunrise: " + sunrise + ' AM' +
                 " Sunset: " + sunset + ' PM' + "</li></ul>"                    
             );
-
-            $("span").text(weatherInfoURL + "weatherMain is: " + weatherMain); //test area - remove when done.
-        }); 
-      
+        });    
     };
 
     function getLocation() {
@@ -97,40 +79,18 @@ $(document).ready(function() {
             getWeatherInfo(latitude, longitude);      
             });
         } 
-    
     }
 
     function displayWeatherScene(weatherMain, sunriseUTC, sunsetUTC) {
-        var timeCompare = new Date();
+        var currentTime = new Date();
 
-        if (timeCompare >= sunriseUTC) {
+         if (currentTime.getHours() >= sunriseUTC.getHours() && currentTime.getMinutes() >= sunriseUTC.getMinutes() && currentTime.getHours() <= sunsetUTC.getHours() && currentTime.getMinutes() <= sunsetUTC.getMinutes()) {
             $("#weather-scene").html("<img src='projectArt/sun.svg'>");              
             $("#weather-scene").css({ "background-color": "#7ec0ee"});            
         } else {
             $("#weather-scene").html("<img src='projectArt/full-moon.svg'>");              
-            $("#weather-scene").css({ "background-color": "#191970"});
-        }
-        
-
-        /*
-        switch(weatherMain) {
-            case "Clear":    
-                $("#weather-scene").html("<img src='projectArt/sun.svg'>");              
-                $("#weather-scene").css({ "background-color": "#7ec0ee"});
-                break;
-            case "Clouds":    
-                $("#weather-scene").html("<img src='projectArt/cloud.svg'>");
-                $("#weather-scene").css({ "background-color": "#4a708b"});
-                break;
-            case "Haze":    
-                $("#weather-scene").html("<img src='projectArt/cloud.svg'>");
-                $("#weather-scene").css({ "background-color": "#4a708b"});
-                break;
-            default:
-            $("#weather-scene").html("COME BACK FOR YOUR WEATHER FIX LATER..go get a burger.");
-        
-        }
-        */
+            $("#weather-scene").css({ "background-color": "#2A216B"});
+        }    
     }
 
     function getDateTime (cityName, country) {
@@ -167,28 +127,4 @@ $(document).ready(function() {
         var dateTime = date + ' ' + time; 
         $(".date-time").html(cityName + ", " + country + "</br>" + dateTime);
     }
-
-            
-    /*
-    function showQuote() {
-        $("#scrolling-quote").html("")
-            .show("slide", { direction: "right" }, 100)
-            .hide("slide", { direction: "left" }, 100);
-        $.getJSON(forismaticURL, function(data) {
-            var quote = data.quoteText;
-            var author = data.quoteAuthor;    
-            var fullQuote = quote + " - " + author;
-        
-        $("#scrolling-quote").html(fullQuote)
-        .show("slide", { direction: "right" }, 10000)
-        .hide("slide", { direction: "left" }, 10000);
-              
-        }); 
-        setTimeout(
-            $("scrolling-quote").
-            , 5000); 
-        
-    }
-*/
-
 }); 
