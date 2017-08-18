@@ -1,6 +1,3 @@
-
-var forismaticURL = "https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?"
-
 $(document).ready(function() {
     $.ajaxSetup({ cache: false });
     
@@ -14,7 +11,7 @@ $(document).ready(function() {
 
         $.get(weatherInfoURL, function(data) {
             // weather
-            var weatherMain = data.weather[0].main; //might or might not need.
+            var weatherMain = data.weather[0].main;
             var weatherDescription = data.weather[0].description; 
             var weatherIcon = data.weather[0].icon; 
             // main
@@ -27,9 +24,15 @@ $(document).ready(function() {
             var sunriseUTC = new Date(data.sys.sunrise * 1000); 
             var sunsetUTC = new Date(data.sys.sunset * 1000);             
             var cityName = data.name; 
-
+            var showSunsetHour = sunsetUTC.getHours();
+            
+            if (showSunsetHour >= 13) {
+                showSunsetHour -= 12;
+            }
+            
             sunrise = sunriseUTC.getHours() + ':' + sunriseUTC.getMinutes();    
-            sunset = sunsetUTC.getHours() + ':' + sunsetUTC.getMinutes();
+            sunset = showSunsetHour + ':' + sunsetUTC.getMinutes();
+
             var tempFC = "F";        
             
             $(".buttonF").click(function() {
@@ -52,10 +55,8 @@ $(document).ready(function() {
                 " / " + tempMin + "° " + tempFC + "</div>");
             });
 
-            getDateTime(cityName, country);
-            displayWeatherScene(weatherMain, sunriseUTC, sunsetUTC);
-            
-            // Display the returned data in browser
+            displayCurrentDateTime(cityName, country);
+            displayWeatherScene(sunriseUTC, sunsetUTC);
             
             $(".weather-data").html(
                 "<ul><li><div class='main-temp'>" + temp + "° " + tempFC +                 
@@ -81,7 +82,7 @@ $(document).ready(function() {
         } 
     }
 
-    function displayWeatherScene(weatherMain, sunriseUTC, sunsetUTC) {
+    function displayWeatherScene(sunriseUTC, sunsetUTC) {
         var currentTime = new Date();
 
          if (currentTime.getHours() >= sunriseUTC.getHours() && currentTime.getMinutes() >= sunriseUTC.getMinutes() && currentTime.getHours() <= sunsetUTC.getHours() && currentTime.getMinutes() <= sunsetUTC.getMinutes()) {
@@ -93,7 +94,7 @@ $(document).ready(function() {
         }    
     }
 
-    function getDateTime (cityName, country) {
+    function displayCurrentDateTime (cityName, country) {
         var weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -117,9 +118,12 @@ $(document).ready(function() {
         }
 
         if (hour > 11 ) {
-            ampm = ampm + ' PM';
+            ampm = ' PM';
         } else {
-            ampm = ampm + ' AM';
+            ampm = ' AM';
+        }
+        if (hour >= 13) {
+            hour -= 12;
         }
 
         var date = weekday + ' - ' + month + ', ' + day + ' ' + year;
