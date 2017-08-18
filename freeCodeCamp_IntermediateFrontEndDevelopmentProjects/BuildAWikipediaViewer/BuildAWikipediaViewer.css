@@ -1,0 +1,12 @@
+body {
+    background-color: #90B443;
+}
+
+.wiki-section {
+    border: 8px solid black;
+    width: 400px;
+    height: 200px;
+    background-color: #CC6D00;
+    color: #434242;
+    font-size: 2em;
+}
