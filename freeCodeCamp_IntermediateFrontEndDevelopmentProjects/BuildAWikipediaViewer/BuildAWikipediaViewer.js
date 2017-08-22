@@ -8,9 +8,14 @@ useful links to use for project.
  
 
 $(document).ready(function(){
-    var input = document.getElementById("wiki-search").value;
-    $( "#search-button" ).click(function() {
-        $( ".wiki-section" ).html(input);
-    });
+    var getSearchTerm = document.getElementById("search-button"); 
+
+    getSearchTerm.addEventListener("click", findWikiPage, false);
+
+    function findWikiPage() {
+        var searchTerm = document.getElementById("wiki-search").value;
+        var print = document.getElementById("wiki-section");
+        $(print).html(searchTerm);
+    }    
     
 });

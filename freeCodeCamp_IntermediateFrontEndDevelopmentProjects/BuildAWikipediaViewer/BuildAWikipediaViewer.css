@@ -5,17 +5,31 @@
 */
 .heading {
     padding: 2% 0;
+    background-color: #082F5E;
+    height: 180px;
 }
 body {
-    background-color: #90B443;
-    padding-top: 150px;
+    background-color: #903400;
+    padding-top: 200px;
 }
 
-.wiki-section {
+.wiki-section-styling {
     border: 8px solid black;
-    width: 400px;
-    height: 200px;
-    background-color: #CC6D00;
-    color: #434242;
+    background-color: #2B568A;
+    color: black;
+    font-size: 2em;
+    position: absolute;
+    left: 50%;
+    margin-left: -40%;
+    width: 80%;
+    min-height: 150px;
+}
+
+#my-name {   
+    text-decoration: none;
+}
+
+.heading-text {
+    color: #905800;
     font-size: 2em;
 }
