@@ -9,6 +9,13 @@ useful links to use for project.
 
 $(document).ready(function(){
     var getSearchTerm = document.getElementById("search-button"); 
+   
+    $("#wiki-search").keydown(function (event) {
+        if(event.keyCode == 13) {
+            $(getSearchTerm).click();
+            return false;
+        }
+    });
 
     getSearchTerm.addEventListener("click", findWikiPage, false);
 
@@ -16,6 +23,7 @@ $(document).ready(function(){
         var searchTerm = document.getElementById("wiki-search").value;
         var print = document.getElementById("wiki-section");
         $(print).html(searchTerm);
+
     }    
     
 });

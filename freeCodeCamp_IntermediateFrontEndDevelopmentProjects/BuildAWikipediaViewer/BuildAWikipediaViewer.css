@@ -33,3 +33,6 @@ body {
     color: #905800;
     font-size: 2em;
 }
+.wiki-search-padding {
+    padding: 0 10%;
+}
