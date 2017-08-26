@@ -21,8 +21,13 @@ $(document).ready(function(){
 
     function findWikiPage() {
         var searchTerm = document.getElementById("wiki-search").value;
-        var print = document.getElementById("wiki-section");
-        $(print).html(searchTerm);
+        var printSearchResult = document.getElementById("wiki-section");
+        var wikiUrl = "https://en.wikipedia.org/w/api.php?action=query&format=json&generator=search&grnnamespace=0&prop=extracts&exlimit=max&explaintext&exintro&gsrsearch=" + searchTerm + "&callback=?";
+        //var wikiUrl = "https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=revisions|images|info&titles=cookie&rvprop=content&imlimit=1&callback=?";
+        $.getJSON( wikiUrl, function(data) {
+            var result= data.query.pages[0].extract;
+            $(printSearchResult).html(result);
+        });
 
     }    
     

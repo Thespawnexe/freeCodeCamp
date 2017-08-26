@@ -8,6 +8,11 @@
     background-color: #082F5E;
     height: 180px;
 }
+
+header {
+    position: fixed;
+    z-index: 1;
+}
 body {
     background-color: #903400;
     padding-top: 200px;
@@ -22,7 +27,7 @@ body {
     left: 50%;
     margin-left: -40%;
     width: 80%;
-    min-height: 150px;
+    min-height: 2000px;
 }
 
 #my-name {   
