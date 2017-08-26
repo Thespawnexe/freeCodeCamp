@@ -1,8 +1,8 @@
-/*
+
 * {
-    border: 1px dashed rebeccapurple;
+    border: 1px dashed #30FE3D;
 }
-*/
+
 .heading {
     padding: 2% 0;
     background-color: #082F5E;
@@ -16,6 +16,15 @@ header {
 body {
     background-color: #903400;
     padding-top: 200px;
+}
+
+img {
+    opacity: 0.5;
+    width: 40%;
+}
+
+li {
+    list-style: none;
 }
 
 .wiki-section-styling {
