@@ -21,26 +21,32 @@ $(document).ready(function(){
     getSearchTerm.addEventListener("click", findWikiPage, false);
 
     function findWikiPage() {
-        var searchTerm = "doppler";//document.getElementById("wiki-search").value;
-        var printSearchResult = document.getElementById("wiki-section");
-        var wikiUrl = "https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=" + searchTerm +  "&callback=?"; //this works
+        var searchTerm = document.getElementById("wiki-search").value;
+       // var printSearchResult = document.getElementById("wiki-section");
+        var wikiUrl = "https://en.wikipedia.org/w/api.php?action=opensearch&format=json&limit=5&search=" + searchTerm +  "&callback=?"; //this works
 
-        $.getJSON( wikiUrl, function(data) {
-            var title = data[0];
-            var topic = data[1];
-            var topicDescription = data[2];
-            var topicUrl = data[3];
-            $("#wiki-search-title").html(title.toUpperCase());
-            
-            $("ul").html(
-                "<li>" + topic[9] + "<a href="+ topicUrl[9] + " target='_blank'>link</a> " + topicDescription[9] + "</li>" + 
-                "<li>" + topic[8] + "<a href="+ topicUrl[8] + " target='_blank'>link</a> " + topicDescription[8] + "</li>"
-            
-            );
-            
-            //$(printSearchResult).html(result);
-        });
-
+        if ( searchTerm.length === 0) {
+            $("ul").html("<li>No search results found. Please try another search.</li>");
+        } else {
+            $.getJSON( wikiUrl, function(data) {
+                var title = data[0];
+                var topic = data[1];
+                var topicDescription = data[2];
+                var topicUrl = data[3];
+                
+                if (topic.length === 0) {
+                    $("ul").html("<li>No search results found. Please try another search.</li>");    
+                } else {
+                    $("ul").empty();
+                    $("#wiki-search-title").html(title.toUpperCase());
+                    for(var i=0; i < topic.length; i++) { 
+                        $("ul").append(
+                        "<li><div class='topic-title'>" + topic[i] + "</div><div class='topic-description'>" + topicDescription[i] + "</div><div><a href="+ topicUrl[i] + " target='_blank' class='text-right'>Find out more...</a></div></li>" 
+                        );
+                    }
+                }
+            });
+        }
     }    
     
 });

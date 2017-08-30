@@ -1,12 +1,13 @@
-
+/*
 * {
     border: 1px dashed #30FE3D;
 }
+*/
 
 .heading {
     padding: 2% 0;
     background-color: #082F5E;
-    height: 180px;
+    /*height: 180px;*/
 }
 
 header {
@@ -15,16 +16,24 @@ header {
 }
 body {
     background-color: #903400;
-    padding-top: 200px;
+    padding-top: 280px;
 }
 
 img {
     opacity: 0.5;
     width: 40%;
+    max-width: 120px;
 }
 
 li {
     list-style: none;
+    padding: 0 2% 2% 2%;
+}
+li:hover {
+    border-left: 8px dotted greenyellow;
+    background: linear-gradient( 270deg, #2B568A 0%, #2A216B 20%);
+    transition: background 1s ease-in;
+    color: white;
 }
 
 .wiki-section-styling {
@@ -36,13 +45,20 @@ li {
     left: 50%;
     margin-left: -40%;
     width: 80%;
-    min-height: 2000px;
+ /*   min-height: 2000px;*/
 }
 
 #my-name {   
     text-decoration: none;
 }
 
+.topic-description {
+    font-size: 16px;
+}
+
+.topic-title {
+    font-size: 24px;
+}
 .heading-text {
     color: #905800;
     font-size: 2em;
