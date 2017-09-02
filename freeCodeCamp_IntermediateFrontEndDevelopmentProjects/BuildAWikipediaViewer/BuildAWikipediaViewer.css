@@ -5,64 +5,142 @@
 */
 
 .heading {
-    padding: 2% 0;
-    background-color: #082F5E;
-    /*height: 180px;*/
+    padding: 2%;
+    background-color: #574CA3; 
+    border-bottom: 10px solid #184072;
 }
 
-header {
-    position: fixed;
-    z-index: 1;
-}
 body {
-    background-color: #903400;
+    background-color: #6A8DB6;
     padding-top: 280px;
 }
 
 img {
-    opacity: 0.5;
+    opacity: 0.8;
     width: 40%;
-    max-width: 120px;
+    max-width: 100px;
+    margin: 2%;
 }
 
 li {
     list-style: none;
     padding: 0 2% 2% 2%;
+    margin: 0 5% 2% 0;
+    background-color: #2B568A;
+    border-radius: 25px;
 }
 li:hover {
-    border-left: 8px dotted greenyellow;
-    background: linear-gradient( 270deg, #2B568A 0%, #2A216B 20%);
-    transition: background 1s ease-in;
-    color: white;
+    border-left: 8px solid snow;
+    border-right: 8px solid snow;
+    transition: 0.2s;
+    box-shadow: 0 0 8px #FFDD9F;
 }
 
 .wiki-section-styling {
-    border: 8px solid black;
-    background-color: #2B568A;
-    color: black;
-    font-size: 2em;
+    color: wheat;
     position: absolute;
     left: 50%;
     margin-left: -40%;
     width: 80%;
- /*   min-height: 2000px;*/
 }
 
 #my-name {   
     text-decoration: none;
+    font-size: 1.6em;
+}
+#my-name:hover, #topic-url:hover, .attribution a:hover {
+color: brown;
+transition: 0.4s;
 }
 
-.topic-description {
-    font-size: 16px;
+#wiki-search-title {
+    font-size: 60px;
+    padding-top: 2%;
+    font-weight: bold;
+    font-family: 'Baloo Bhaijaan', cursive;
+}
+
+#heading {
+    font-family: 'Baloo Bhaijaan', cursive;
 }
 
 .topic-title {
-    font-size: 24px;
+    font-size: 32px;
+    font-weight: bold;
+    font-family: 'Baloo Bhaijaan', cursive;
+    background-color: #31b0d5;
+    border-radius: 15px;
+    padding-left: 20px;
+    box-sizing: content-box;
+    border: none;
+    text-overflow: ellipsis;
+    background: radial-gradient(rgb(160, 215, 255) 0, rgb(160, 215, 255) 0, rgb(160, 215, 255) 2%, rgba(0,150,255,1) 100%);
+    background-position: 50% 50%;
+    background-origin: padding-box;
+    background-clip: border-box;
+    background-size: auto auto;
 }
+
+.topic-description {
+    font-size: 18px;
+    font-family: 'Inconsolata', monospace;
+}
+#topic-url {
+    font-size: 18px;
+    font-family: 'Droid Serif', serif;
+    color: whitesmoke;
+    font-weight: bold;
+    padding: 2%; 
+    text-decoration: none;
+}
+ 
 .heading-text {
-    color: #905800;
-    font-size: 2em;
+    color: #EBB35B;
+    font-size: 3em;
 }
+
 .wiki-search-padding {
     padding: 0 10%;
+}
+
+.text-border {
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 1px 1px 2px #2A216B;
+}
+
+
+.box-shadow {
+  	position:relative;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.3) inset;
+}
+
+.box-shadow:before, .box-shadow:after {
+	content:"";
+    position:absolute;
+    z-index: -1;
+    box-shadow:0 0 20px rgba(0,0,0,0.8);
+    top:10px;
+    bottom:10px;
+    left:0;
+    right:0;
+    border-radius:100px / 10px;
+}
+
+.box-shadow:after {
+	right:10px;
+    left:auto;
+    transform:skew(8deg) rotate(3deg);
+}
+
+.wiki-img {
+    background: url("wikipedia-logotype-of-earth-puzzle.svg") no-repeat center center;
+    background-size: contain; 
+}
+
+.attribution a {
+    text-decoration: none;
+}
+
+.attribution {
+    color: snow;
+    padding: 2% 0 0 0;
 }

@@ -1,34 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head>    
     <meta charset="utf-8">
     <title>Wikipedia Viewer</title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="BuildAWikipediaViewer.css">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Bhaijaan|Droid+Serif|Inconsolata" rel="stylesheet">  
 </head>
 <body>
     <header>
-        <div class="container-fluid row navbar-fixed-top heading" id="heading">
-            <div class="col-md-3 col-sm-3 text-center heading-text" id="page-title">
-                <i class="fa fa-wikipedia-w" aria-hidden="true">ikipedia Viewer</i>
-            <!--    <img src="http://www.userlogos.org/files/logos/Ixodides/wiki.png"> -->
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Wikipedia_logo_3d_gold.png"> 
+        <div class="container-fluid row navbar-fixed-top heading text-border" id="heading">
+            <div class="col-md-3 col-sm-3 text-center heading-text wiki-img" id="page-title">
+                <p>WIKIPEDIA VIEWER</p>
             </div>
             <div class="col-md-6 col-sm-6 text-center">
                 <form class="form-inline wiki-search-padding">   
                     <div class="input-group"> 
                         <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
-                        <input class="form-control" type="search" id="wiki-search" name="q" autofocus="autofocus" autocomplete="off" placeholder="Search Wiki..." size ="24" required>
+                        <input class="form-control" type="search" id="wiki-search" name="q" autofocus="autofocus" autocomplete="off" placeholder="Search Wiki..." size ="42" required>
                     </div>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-primary" id="search-button">Search</button>
+                        <button type="button" class="btn btn-primary text-border" id="search-button">Search</button>
                         <a class="btn btn-info" href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">Random Wiki</a>
                     </div>
                 </form>
+                <div class="text-center attribution">Wiki Globe icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> and is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC BY 3.0</a></div>           
             </div>
             <div class="col-md-3 col-sm-3 text-center">
                 <a href="https://codepen.io/Thespawnexe/#" class="heading-text" target="_blank" id="my-name"><i class="fa fa-copyright"></i> 2017 - Thespawnexe</a>
@@ -36,13 +35,10 @@
         </div>
     </header>
     
-    <div class="wiki-section-styling" id="wiki-section">
+    <div class="wiki-section-styling text-border" id="wiki-section">
         <p class="text-center" id="wiki-search-title"></p>
-        
         <ul>
-            
-        </ul>
-        
+        </ul>    
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -50,5 +46,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
         
     <script type="text/javascript" src="BuildAWikipediaViewer.js"></script>
+
 </body>
 </html>
