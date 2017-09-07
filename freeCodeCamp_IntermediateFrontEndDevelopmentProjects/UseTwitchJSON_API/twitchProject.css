@@ -128,3 +128,31 @@ transition: 0.4s;
     color: snow;
     padding: 2% 0 0 0;
 }
+
+#btn-all {
+    cursor: pointer; cursor: hand;
+    width: 0;
+    color: blue;
+}
+
+#btn-online {
+    cursor: pointer; cursor: hand;
+    width: 0;
+    color: green;
+}
+
+#btn-offline {
+    cursor: pointer; cursor: hand;
+    width: 0;
+    color: red;
+}
+
+#btn-all:hover, #btn-online:hover, #btn-offline:hover {
+    cursor: pointer; cursor: hand;
+    width: 100px;
+    background-color: grey;
+    border-bottom: 2px solid snow;
+    border-right: 2px solid snow; 
+    -webkit-transition: width 2s;
+    transition: width 1s;
+}

@@ -20,3 +20,31 @@ UPDATE: Due to a change in conditions on API usage explained here Twitch.tv now 
 
 
 */
+var urlEntry = "https://wind-bow.glitch.me/twitch-api/streams/"; // need urlEntry/streams/streamName, urlEntry/channels/channelName, urlEntry/users/userName
+// ex: urlEntry/streams/hsdogdog, urlEntry/channels/hsdogdog, urlEntry/users/hsdogdog
+// main one will be: https://wind-bow.glitch.me/twitch-api/streams/ then https://wind-bow.glitch.me/twitch-api/users/ 
+var streams = ["leveluplive", "freecodecamp"]; //userName
+
+document.getElementById('btn-all').addEventListener("click", displayAllChannels, false);
+document.getElementById('btn-online').addEventListener("click", displayOnlineChannels, false);
+document.getElementById('btn-offline').addEventListener("click", displayOfflineChannels, false);
+
+function displayAllChannels () {
+    $("ul").html("<li>All Channels: ON</li>");
+};
+
+function displayOnlineChannels() {
+    $("ul").html("<li>ONLINE Channels</li>");
+};
+function displayOfflineChannels() {
+    $("ul").html("<li>OFFLINE channels</li>");
+};
+
+$(document).ready(function(){
+    displayAllChannels();
+    
+    $.getJSON('https://wind-bow.gomix.me/twitch-api/streams/freecodecamp?callback=?', function(data) {
+        console.log(data);
+        $("ul").append(data);
+      });
+});
