@@ -22,14 +22,16 @@ UPDATE: Due to a change in conditions on API usage explained here Twitch.tv now 
 */
 var urlEntry = "https://wind-bow.glitch.me/twitch-api/streams/"; // need urlEntry/streams/streamName, urlEntry/channels/channelName, urlEntry/users/userName
 // ex: urlEntry/streams/hsdogdog, urlEntry/channels/hsdogdog, urlEntry/users/hsdogdog
-// main one will be: https://wind-bow.glitch.me/twitch-api/streams/ then https://wind-bow.glitch.me/twitch-api/users/ 
-var streams = ["leveluplive", "freecodecamp"]; //userName
+// main one will be: https://wind-bow.glitch.me/twitch-api/streams/  
+// might use bio from: https://wind-bow.glitch.me/twitch-api/users/
+var streamChannel = ["leveluplive", "freecodecamp", "Kolento","fakeChannelzfe", "TSM_Dyrus", "brialeigh"]; //userName
 
 document.getElementById('btn-all').addEventListener("click", displayAllChannels, false);
 document.getElementById('btn-online').addEventListener("click", displayOnlineChannels, false);
 document.getElementById('btn-offline').addEventListener("click", displayOfflineChannels, false);
 
 function displayAllChannels () {
+    getChannelInfo(urlEntry, streamChannel);
     $("ul").html("<li>All Channels: ON</li>");
 };
 
@@ -43,8 +45,25 @@ function displayOfflineChannels() {
 $(document).ready(function(){
     displayAllChannels();
     
-    $.getJSON('https://wind-bow.gomix.me/twitch-api/streams/freecodecamp?callback=?', function(data) {
-        console.log(data);
-        $("ul").append(data);
-      });
+
 });
+function getChannelInfo (urlEntry, streamChannel) {
+    for (var i=0; i< streamChannel.length; i++) {
+        $.getJSON(urlEntry + streamChannel[i], function(data) {
+            if (data.stream === null) {
+                $("ul").append("<li> channel is offline</li>");
+            } 
+            else {
+                $("ul").append(
+                    "<a href=" + data.stream.channel.url + " target='_blank' rel='noopener noreferrer'><li>" +
+                    "<img src=" + data.stream.channel.logo + " alt='Stream Logo' height='100px'> " +
+                    "<img src=" + data.stream.preview.medium + " alt='Stream Preview' height='100px'> " +
+                    " Game: " + data.stream.game +
+                    " Viewers: " + data.stream.viewers +
+                    " Channel: " + data.stream.channel.display_name + 
+                    " Status: " + data.stream.channel.status +
+                    "</li></a>");
+            }
+        });
+    }
+}
