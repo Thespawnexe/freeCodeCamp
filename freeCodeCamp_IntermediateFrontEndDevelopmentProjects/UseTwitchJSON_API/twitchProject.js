@@ -20,50 +20,137 @@ UPDATE: Due to a change in conditions on API usage explained here Twitch.tv now 
 
 
 */
-var urlEntry = "https://wind-bow.glitch.me/twitch-api/streams/"; // need urlEntry/streams/streamName, urlEntry/channels/channelName, urlEntry/users/userName
+var urlEntry = "https://wind-bow.glitch.me/twitch-api/"; // need urlEntry/streams/streamName, urlEntry/channels/channelName, urlEntry/users/userName
+var urlStream = "streams/";
+var urlChannel = "channels/";
+var streamChannelList = ["freecodecamp", "Warcraft"]//["TestChannel", "leveluplive", "freecodecamp", "Kolento","fakeChannelzfe", "TSM_Dyrus"]; //userName
+
 // ex: urlEntry/streams/hsdogdog, urlEntry/channels/hsdogdog, urlEntry/users/hsdogdog
 // main one will be: https://wind-bow.glitch.me/twitch-api/streams/  
 // might use bio from: https://wind-bow.glitch.me/twitch-api/users/
-var streamChannel = ["leveluplive", "freecodecamp", "Kolento","fakeChannelzfe", "TSM_Dyrus", "brialeigh"]; //userName
 
 document.getElementById('btn-all').addEventListener("click", displayAllChannels, false);
 document.getElementById('btn-online').addEventListener("click", displayOnlineChannels, false);
 document.getElementById('btn-offline').addEventListener("click", displayOfflineChannels, false);
 
 function displayAllChannels () {
-    getChannelInfo(urlEntry, streamChannel);
-    $("ul").html("<li>All Channels: ON</li>");
+    // show online channels
+    displayOnlineChannels();
+    // show offline channels
+    displayOfflineChannels();
+    // show defunct channels
+    
+    getChannelInfo(urlEntry, urlStream, urlChannel, streamChannelList);
+    $("ul").append("<li>All Channels: ON</li>");
 };
 
 function displayOnlineChannels() {
-    $("ul").html("<li>ONLINE Channels</li>");
+    $("ul").append("<li>ONLINE: Channels</li>");
 };
 function displayOfflineChannels() {
-    $("ul").html("<li>OFFLINE channels</li>");
+
+    $("ul").append("<li>OFFLINE: channels</li>");
 };
 
 $(document).ready(function(){
     displayAllChannels();
-    
-
 });
-function getChannelInfo (urlEntry, streamChannel) {
-    for (var i=0; i< streamChannel.length; i++) {
-        $.getJSON(urlEntry + streamChannel[i], function(data) {
-            if (data.stream === null) {
-                $("ul").append("<li> channel is offline</li>");
-            } 
-            else {
-                $("ul").append(
-                    "<a href=" + data.stream.channel.url + " target='_blank' rel='noopener noreferrer'><li>" +
-                    "<img src=" + data.stream.channel.logo + " alt='Stream Logo' height='100px'> " +
-                    "<img src=" + data.stream.preview.medium + " alt='Stream Preview' height='100px'> " +
-                    " Game: " + data.stream.game +
-                    " Viewers: " + data.stream.viewers +
-                    " Channel: " + data.stream.channel.display_name + 
-                    " Status: " + data.stream.channel.status +
-                    "</li></a>");
+
+function getChannelInfo (urlEntry, urlStream, urlChannel, streamChannelList) {
+    
+    streamChannelList.forEach(function(stream){
+        var channelViewerCount, channelPreview, channelStatus, 
+        channelName, channelGame, channelLogo, channelUrl;
+
+        var currentChannelState = "online"; 
+
+        $.getJSON(urlEntry + urlStream + stream, function(streams_data) {
+            
+            if(streams_data.stream === null) {
+                channelViewerCount = "Offline";
+                currentChannelState = "offline";
+            
+            } else {
+                channelViewerCount = streams_data.stream.viewers;
             }
+               
+            $.getJSON(urlEntry + urlChannel + stream, function(channels_data) {
+                channelGame = channels_data.game;
+                $("ul").append("<li class=" + currentChannelState + ">[Streams]viewer Count: " + channelViewerCount +" [channels] Game: " + channelGame + "</li>");
+
+            });
+            
+        }); 
+            
+    });
+
+}
+    
+    
+    
+    /*
+    for (var i=0; i< streamChannelList.length; i++) {
+        
+        $.getJSON(urlEntry + urlStream + streamChannelList[i], function(data) {
+            var channelViewerCount, channelPreview; 
+
+            if(data.stream === null) {
+                channelViewerCount = "Channel is currently offline";
+                channelPreview = "#";
+
+            } else {
+                channelViewerCount = data.stream.viewers;
+                channelPreview = data.stream.preview.medium;
+
+            }
+            
+            $.getJSON(urlEntry + urlChannel + streamChannelList[i], function(data) {
+                
+                var channelStatus = data.status;
+                var channelName = data.display_name;
+                var channelGame = data.game;
+                var channelLogo = data.logo;
+                var channelUrl = data.url;
+            
+                    $("ul").append(
+                        "<a href=" + channelUrl + " target='_blank' rel='noopener noreferrer'><li>" +
+                        "<img src=" + channelLogo + " alt='Stream Logo' height='100px'> " +
+                        "<img src=" + channelPreview + " alt='Stream Preview' height='100px'> " +
+                        " Game: " + channelGame +
+                        " Viewers: " + channelViewerCount +
+                        " Channel: " + channelName + 
+                        " Status: " + channelStatus +
+                        "</li></a>");    
+                    
+                });
+            
         });
+
+        /*
+        
     }
 }
+
+
+
+            
+            
+            /*            
+            if (data.error === "Not Found") {
+                $("ul").append("<li class='box-shadow'>Channel No Longer Exists</li>");
+            } else {
+                */
+                    /*
+                    if (data.stream === null) {
+                      
+                        $("ul").append(
+                            "<a href=" + channelUrl + " target='_blank' rel='noopener noreferrer'><li class='box-shadow'>" +
+                            "<img src=" + channelLogo + " alt='Stream Logo' height='100px'> " +
+                            /*"<img src=" + channelPreview + " alt='Stream Preview' height='100px'> " + 
+                            " Game: " + channelGame +
+                            /*" Viewers: " + channelViewerCount + 
+                            " Channel: " + channelName + 
+                            " Status: " + channelStatus +
+                            "</li></a>");                                        
+                    } else {
+                        */ 

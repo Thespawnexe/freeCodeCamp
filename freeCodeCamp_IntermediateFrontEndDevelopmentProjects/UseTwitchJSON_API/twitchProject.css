@@ -3,6 +3,7 @@
     background-color: #6441A4; 
     border-right: 10px solid #184072;
     height: 280px;
+    margin-bottom: 10%;
 }
 
 body {
@@ -14,7 +15,8 @@ li {
     padding: 0 2% 2% 2%;
     margin: 0 5% 2% 0;
     background-color: #2B568A;
-    border-radius: 25px;
+    color: white;
+    font-weight: bold;
 }
 
 li:hover {
@@ -24,14 +26,6 @@ li:hover {
     box-shadow: 0 0 8px #FFDD9F;
 }
 
-.wiki-section-styling {
-    color: wheat;
-    position: absolute;
-    left: 50%;
-    margin-left: -40%;
-    width: 80%;
-}
-
 #my-name {   
     text-decoration: none;
     font-size: 1.2em;
@@ -39,22 +33,14 @@ li:hover {
     font-weight: bold;
 }
 
-#my-name:hover, #topic-url:hover, .attribution a:hover {
-color: brown;
+#my-name:hover {
+color: white;
 transition: 0.4s;
 }
 
-#wiki-search-title {
-    font-size: 48px;
-    padding-top: 2%;
-    font-weight: bold;
-    font-family: 'Baloo Bhaijaan', cursive;
+.twitch-img {
+    width: 100px;
 }
-
-#heading {
-    font-family: 'Baloo Bhaijaan', cursive;
-}
-
 .topic-title {
     font-size: 32px;
     font-weight: bold;
@@ -72,61 +58,12 @@ transition: 0.4s;
     background-size: auto auto;
 }
 
-.topic-description {
-    font-size: 18px;
-    font-family: 'Inconsolata', monospace;
-}
-#topic-url {
-    font-size: 18px;
-    font-family: 'Droid Serif', serif;
-    color: whitesmoke;
-    font-weight: bold;
-    padding: 2%; 
-    text-decoration: none;
-}
- 
-.wiki-search-padding {
-    padding: 0 10%;
-}
-
 .text-border {
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 1px 1px 2px #2A216B;
 }
 
 .box-shadow {
-  	position:relative;
-    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.3) inset;
-}
-
-.box-shadow:before, .box-shadow:after {
-	content:"";
-    position:absolute;
-    z-index: -1;
-    box-shadow:0 0 20px rgba(0,0,0,0.8);
-    top:10px;
-    bottom:10px;
-    left:0;
-    right:0;
-    border-radius:100px / 10px;
-}
-
-.box-shadow:after {
-	right:10px;
-    left:auto;
-    transform:skew(8deg) rotate(3deg);
-}
-
-.twitch-img {
-    width: 100px;
-}
-
-.attribution a {
-    text-decoration: none;
-}
-
-.attribution {
-    color: snow;
-    padding: 2% 0 0 0;
+    box-shadow:10px 10px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.3) inset;
 }
 
 #btn-all {
@@ -155,4 +92,12 @@ transition: 0.4s;
     border-right: 2px solid snow; 
     -webkit-transition: width 2s;
     transition: width 1s;
+}
+
+.online {
+    border-bottom: 8px solid greenyellow;
+}
+
+.offline {
+    border-bottom: 8px solid orangered;
 }
