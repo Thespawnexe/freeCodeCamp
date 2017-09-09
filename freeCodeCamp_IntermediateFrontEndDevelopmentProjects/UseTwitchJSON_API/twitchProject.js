@@ -23,40 +23,40 @@ UPDATE: Due to a change in conditions on API usage explained here Twitch.tv now 
 var urlEntry = "https://wind-bow.glitch.me/twitch-api/"; // need urlEntry/streams/streamName, urlEntry/channels/channelName, urlEntry/users/userName
 var urlStream = "streams/";
 var urlChannel = "channels/";
-var streamChannelList = ["freecodecamp", "Warcraft"]//["TestChannel", "leveluplive", "freecodecamp", "Kolento","fakeChannelzfe", "TSM_Dyrus"]; //userName
+var streamChannelList = ["shroud","freecodecamp", "fakechannelnameftw", "Warcrafts", , "Warcraft"]//["fakechannelnameftw", "leveluplive", "freecodecamp", "Kolento","fakeChannelzfe", "TSM_Dyrus"]; //userName
 
 // ex: urlEntry/streams/hsdogdog, urlEntry/channels/hsdogdog, urlEntry/users/hsdogdog
 // main one will be: https://wind-bow.glitch.me/twitch-api/streams/  
 // might use bio from: https://wind-bow.glitch.me/twitch-api/users/
 
-document.getElementById('btn-all').addEventListener("click", displayAllChannels, false);
-document.getElementById('btn-online').addEventListener("click", displayOnlineChannels, false);
-document.getElementById('btn-offline').addEventListener("click", displayOfflineChannels, false);
+document.getElementById('btn-all').addEventListener("click", showAllChannels, false);
+document.getElementById('btn-online').addEventListener("click", showOnlineChannels, false);
+document.getElementById('btn-offline').addEventListener("click", showOfflineChannels, false);
 
-function displayAllChannels () {
-    // show online channels
-    displayOnlineChannels();
-    // show offline channels
-    displayOfflineChannels();
-    // show defunct channels
+function showAllChannels () {
     
-    getChannelInfo(urlEntry, urlStream, urlChannel, streamChannelList);
-    $("ul").append("<li>All Channels: ON</li>");
+    $(".online").show();
+    $(".offline").show();
+    $(".defunct").show();
+
 };
 
-function displayOnlineChannels() {
-    $("ul").append("<li>ONLINE: Channels</li>");
+function showOnlineChannels() {
+    $(".online").show();
+    $(".offline").hide();
+    $(".defunct").hide();
 };
-function displayOfflineChannels() {
-
-    $("ul").append("<li>OFFLINE: channels</li>");
+function showOfflineChannels() {
+    $(".online").hide();
+    $(".offline").show();
+    $(".defunct").show();
 };
 
 $(document).ready(function(){
-    displayAllChannels();
+    displayChannels(urlEntry, urlStream, urlChannel, streamChannelList);
 });
 
-function getChannelInfo (urlEntry, urlStream, urlChannel, streamChannelList) {
+function displayChannels(urlEntry, urlStream, urlChannel, streamChannelList) {
     
     streamChannelList.forEach(function(stream){
         var channelViewerCount, channelPreview, channelStatus, 
@@ -66,18 +66,45 @@ function getChannelInfo (urlEntry, urlStream, urlChannel, streamChannelList) {
 
         $.getJSON(urlEntry + urlStream + stream, function(streams_data) {
             
-            if(streams_data.stream === null) {
+            // if(streams_data.stream === null) streams_data can't show channelViewerCount or channelPreview
+            if (streams_data.stream === null) {
                 channelViewerCount = "Offline";
                 currentChannelState = "offline";
-            
+                channelPreview = "https://i1.wp.com/static-cdn.jtvnw.net/ttv-static/404_preview-320x180.jpg?resize=320%2C180";
             } else {
                 channelViewerCount = streams_data.stream.viewers;
+                channelPreview = streams_data.stream.preview.medium;
             }
                
             $.getJSON(urlEntry + urlChannel + stream, function(channels_data) {
-                channelGame = channels_data.game;
-                $("ul").append("<li class=" + currentChannelState + ">[Streams]viewer Count: " + channelViewerCount +" [channels] Game: " + channelGame + "</li>");
+                
 
+                // if(channels_data.error === "Not Found") channels_data has nothing to display
+                if (channels_data.error !== undefined) {
+                    currentChannelState = "defunct";
+                    channelGame = "Channel No Longer Exists";
+                    channelLogo = "https://cdn.compliancesigns.com/media/ansi-safety/300/ANSI-Elevator-Sign-ANE-28682_300.gif";
+                    channelName = "Channel No Longer Exists";
+                    channelStatus = "...Out of Order...";
+                    channelUrl = "#";
+                } else {
+                    channelGame = channels_data.game;
+                    channelLogo = channels_data.logo;
+                    channelName = channels_data.name;
+                    channelStatus = channels_data.status;
+                    channelUrl = channels_data.url;
+                }
+                
+                $("ul").append(
+                "<li class=" + "box-shadow "  + currentChannelState + ">" +
+                "<a href=" + channelUrl + " target='_blank' rel='noopener noreferrer'>Channel: " + channelName + "</a>" +
+                "<img src=" + channelLogo + " alt='Stream Logo' height='100px'> " +
+                "<img src=" + channelPreview + " alt='Stream Preview' height='100px'> " +
+                "[Streams]viewer Count: " + 
+                channelViewerCount + " [channels] Game: " + 
+                channelGame + 
+                " Status: " + channelStatus +
+                "</li>");
             });
             
         }); 
@@ -85,72 +112,3 @@ function getChannelInfo (urlEntry, urlStream, urlChannel, streamChannelList) {
     });
 
 }
-    
-    
-    
-    /*
-    for (var i=0; i< streamChannelList.length; i++) {
-        
-        $.getJSON(urlEntry + urlStream + streamChannelList[i], function(data) {
-            var channelViewerCount, channelPreview; 
-
-            if(data.stream === null) {
-                channelViewerCount = "Channel is currently offline";
-                channelPreview = "#";
-
-            } else {
-                channelViewerCount = data.stream.viewers;
-                channelPreview = data.stream.preview.medium;
-
-            }
-            
-            $.getJSON(urlEntry + urlChannel + streamChannelList[i], function(data) {
-                
-                var channelStatus = data.status;
-                var channelName = data.display_name;
-                var channelGame = data.game;
-                var channelLogo = data.logo;
-                var channelUrl = data.url;
-            
-                    $("ul").append(
-                        "<a href=" + channelUrl + " target='_blank' rel='noopener noreferrer'><li>" +
-                        "<img src=" + channelLogo + " alt='Stream Logo' height='100px'> " +
-                        "<img src=" + channelPreview + " alt='Stream Preview' height='100px'> " +
-                        " Game: " + channelGame +
-                        " Viewers: " + channelViewerCount +
-                        " Channel: " + channelName + 
-                        " Status: " + channelStatus +
-                        "</li></a>");    
-                    
-                });
-            
-        });
-
-        /*
-        
-    }
-}
-
-
-
-            
-            
-            /*            
-            if (data.error === "Not Found") {
-                $("ul").append("<li class='box-shadow'>Channel No Longer Exists</li>");
-            } else {
-                */
-                    /*
-                    if (data.stream === null) {
-                      
-                        $("ul").append(
-                            "<a href=" + channelUrl + " target='_blank' rel='noopener noreferrer'><li class='box-shadow'>" +
-                            "<img src=" + channelLogo + " alt='Stream Logo' height='100px'> " +
-                            /*"<img src=" + channelPreview + " alt='Stream Preview' height='100px'> " + 
-                            " Game: " + channelGame +
-                            /*" Viewers: " + channelViewerCount + 
-                            " Channel: " + channelName + 
-                            " Status: " + channelStatus +
-                            "</li></a>");                                        
-                    } else {
-                        */ 
