@@ -20,8 +20,8 @@ li {
 }
 
 li:hover {
-    border-left: 8px solid snow;
-    border-right: 8px solid snow;
+    border-left: 12px solid snow;
+    border-right: 12px solid snow;    
     transition: 0.2s;
     box-shadow: 0 0 8px #FFDD9F;
 }
@@ -33,7 +33,7 @@ li:hover {
     font-weight: bold;
 }
 
-#my-name:hover {
+#my-name:hover, .channel-title a:hover {
 color: white;
 transition: 0.4s;
 }
@@ -41,13 +41,14 @@ transition: 0.4s;
 .twitch-img {
     width: 100px;
 }
-.topic-title {
-    font-size: 32px;
+.channel-title {
+    font-size: 16px;
     font-weight: bold;
-    font-family: 'Baloo Bhaijaan', cursive;
-    background-color: #31b0d5;
-    border-radius: 15px;
-    padding-left: 20px;
+    font-family: arial;
+    color: orange;
+    background-color: #1899BF;
+    padding: 10px 20px;
+    margin: 10px 0;
     box-sizing: content-box;
     border: none;
     text-overflow: ellipsis;
@@ -56,6 +57,25 @@ transition: 0.4s;
     background-origin: padding-box;
     background-clip: border-box;
     background-size: auto auto;
+    line-height: 40px;
+}
+
+.channel-title a {
+    color: green;
+    text-decoration: none;
+}
+
+.channel-content {
+    background-color: green; /* temp */
+}
+
+.channel-content img {
+    box-shadow:2px 2px 4px rgba(246, 123, 123, 0.30);
+    border: 2px solid black;
+}
+
+.channel-status {
+    color: #B29FCD;
 }
 
 .text-border {
@@ -66,41 +86,69 @@ transition: 0.4s;
     box-shadow:10px 10px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.3) inset;
 }
 
-#btn-all {
+#btn-all, #btn-online, #btn-offline {
     cursor: pointer; cursor: hand;
-    width: 0;
+    font-size: 20px;
+    font-weight: bolder;
+}
+#btn-all {
     color: blue;
 }
 
 #btn-online {
-    cursor: pointer; cursor: hand;
-    width: 0;
-    color: green;
+    color: greenyellow;
 }
 
 #btn-offline {
-    cursor: pointer; cursor: hand;
-    width: 0;
     color: red;
 }
 
 #btn-all:hover, #btn-online:hover, #btn-offline:hover {
-    cursor: pointer; cursor: hand;
     width: 100px;
     background-color: grey;
     border-bottom: 2px solid snow;
     border-right: 2px solid snow; 
-    -webkit-transition: width 2s;
-    transition: width 1s;
 }
 
+.online, .offline, .defunct {
+    border-bottom: 8px solid;
+}
 .online {
-    border-bottom: 8px solid greenyellow;
+    border-image: linear-gradient(to top, greenyellow, #2B568A) 10;
 }
 
 .offline {
-    border-bottom: 8px solid orangered;
+    border-image: linear-gradient(to top, red, #2B568A) 10;
 }
+
 .defunct {
-    border-bottom: 8px solid purple;
+    border-image: linear-gradient(to top, darkgrey, #2B568A) 10;
+  
+}
+
+.tv { 
+    position: relative; 
+    width: 40px; 
+    height: 30px; 
+    margin: 2px 0; 
+    background: greenyellow; 
+    border-radius: 50% / 10%; 
+    color: white; 
+    text-align: center; 
+    text-indent: .1em; 
+    box-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 1px 1px 2px #2A216B;
+} 
+
+.tv:before { content: ''; 
+    position: absolute; 
+    top: 10%; 
+    bottom: 10%; 
+    right: -5%; 
+    left: -5%; 
+    background: inherit; 
+    border-radius: 5% / 50%; 
+}
+
+.content-img-size {
+    height: 100px;
 }
