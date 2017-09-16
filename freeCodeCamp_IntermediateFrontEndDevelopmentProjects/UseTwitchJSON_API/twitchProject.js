@@ -2,7 +2,7 @@
 var urlEntry = "https://wind-bow.glitch.me/twitch-api/"; // need urlEntry/streams/streamName, urlEntry/channels/channelName, urlEntry/users/userName
 var urlStream = "streams/";
 var urlChannel = "channels/";
-var streamChannelList = ["reckful","shroud","freecodecamp", "fakechannelnameftw", "Warcrafts", "KayPikeFashion", "Warcraft"]//["fakechannelnameftw", "leveluplive", "freecodecamp", "Kolento","fakeChannelzfe", "TSM_Dyrus"]; //userName
+var streamChannelList = ["summit1g","shroud","freecodecamp", "ESL_CSGO", "KayPikeFashion", "overwatchcontenders", "ELEAGUETV", "beyondthesummit", "yoda"]//["fakechannelnameftw", "leveluplive", "freecodecamp", "Kolento","fakeChannelzfe", "TSM_Dyrus"]; //userName
 
 // ex: urlEntry/streams/hsdogdog, urlEntry/channels/hsdogdog, urlEntry/users/hsdogdog
 // main one will be: https://wind-bow.glitch.me/twitch-api/streams/  
@@ -11,6 +11,16 @@ var streamChannelList = ["reckful","shroud","freecodecamp", "fakechannelnameftw"
 document.getElementById('btn-all').addEventListener("click", showAllChannels, false);
 document.getElementById('btn-online').addEventListener("click", showOnlineChannels, false);
 document.getElementById('btn-offline').addEventListener("click", showOfflineChannels, false);
+
+//makes the button change after being clicked...
+$(".button-group").on("click", function(){
+    $("#btn-online").removeClass("btn_on");
+    $("#btn-offline").removeClass("btn_on");
+    $("#btn-all").removeClass("btn_on");
+    $(this).addClass("btn_on");
+});
+
+
 
 function showAllChannels () {
     
@@ -36,8 +46,9 @@ $(document).ready(function(){
 });
 
 function displayChannels(urlEntry, urlStream, urlChannel, streamChannelList) {
-    
+    $("#btn-all").addClass("btn_on");
     streamChannelList.forEach(function(stream){
+
         var channelViewerCount, channelPreview, channelStatus, 
         channelName, channelGame, channelLogo, channelUrl;
 
@@ -61,11 +72,12 @@ function displayChannels(urlEntry, urlStream, urlChannel, streamChannelList) {
                 // if(channels_data.error === "Not Found") channels_data has nothing to display
                 if (channels_data.error !== undefined) {
                     currentChannelState = "defunct";
-                    channelGame = "Show Cancel";
+                    
+                    channelGame = "...Offline...";
                     channelLogo = "https://cdn.compliancesigns.com/media/ansi-safety/300/ANSI-Elevator-Sign-ANE-28682_300.gif";
-                    channelName = "Show Cancel";
+                    channelName = "...Offline...";
                     channelStatus = "...Out of Order...";
-                    channelUrl = "#";
+                    channelUrl = "https://www.twitch.tv/";
                 } else {
                     channelGame = channels_data.game;
                     channelLogo = channels_data.logo;
@@ -79,8 +91,8 @@ function displayChannels(urlEntry, urlStream, urlChannel, streamChannelList) {
                 "<div class='row channel-title'>" +
                 "<div class='col-md-2 col-sm-2 tv'></div>" +
                 "<div class='col-md-10 col-sm-10  text-border'><a href=" + channelUrl + " target='_blank' rel='noopener noreferrer'>" + 
-                channelName + "</a>" +
-                " Game: " + channelGame + "</div>" + 
+                channelName + " |</a>" +
+                channelGame + "</div>" + 
 
                 "</div>" +
                 "<div class='row'>" +
