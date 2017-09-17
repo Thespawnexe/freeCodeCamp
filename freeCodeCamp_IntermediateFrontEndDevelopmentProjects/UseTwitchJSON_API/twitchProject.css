@@ -2,7 +2,7 @@
     padding: 2%;
     background-color: #6441A4; 
     border-right: 2px solid #184072;
-    height: 280px;
+    height: 100%;
     margin-bottom: 10%;
 
 }
@@ -52,17 +52,10 @@ li:hover, #btn-all:hover, #btn-online:hover, #btn-offline:hover {
     box-shadow: 0 0 4px #FFDD9F;
 }
 
-#my-name {   
-    text-decoration: none;
-    font-size: 1.2em;
-    color: grey;
-    font-weight: bold;
-}
-
 #my-name:hover, .channel-title a:hover {
-color: white;
-transition: 0.4s;
-text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 1px 1px 2px #2A216B;
+    color: #F0DC50;
+    transition: 0.4s;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 1px 1px 2px #2A216B;
 }
 
 .channel-title {
@@ -75,7 +68,7 @@ text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 1px 1px 2px #
     line-height: 40px;
 }
 
-.channel-title a {
+#my-name, .channel-title a {
     color: #6441A4;
     font-size: 16px;
     font-family: 'Bungee', cursive;
@@ -84,14 +77,11 @@ text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 1px 1px 2px #
     padding-right: 10px;
 }
 
-.channel-content {
-    color: green; /* temp */
-}
-
 .channel-content img {
     box-shadow: 1px 1px 2px snow;
     border: 2px solid black;
 }
+
 .channel-status {
     color: orange;
 }
@@ -135,6 +125,7 @@ text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 1px 1px 2px #
 .online, .offline, .defunct {
     border-bottom: 4px solid;
 }
+
 .online, #btn-online {
     border-image: linear-gradient(to right, var(--btn-online), #2B568A) 10;
 }
@@ -160,7 +151,8 @@ text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 1px 1px 2px #
     box-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 1px 1px 2px #2A216B;
 } 
 
-.tv:before { content: ''; 
+.tv:before { 
+    content: ''; 
     position: absolute; 
     top: 10%; 
     bottom: 10%; 
@@ -177,9 +169,11 @@ text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 1px 1px 2px #
 .online .tv {
     background: var(--btn-online);
 }
+
 .offline .tv {
     background: var(--btn-offline);
 }
+
 .defunct .tv {
     background: var(--btn-defunct);
 }
@@ -197,6 +191,7 @@ text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 1px 1px 2px #
     4px 4px 0 black,
     5px 5px 0 black;
 }
+
 .btn_on {
     border-bottom: 4px solid;
     max-width: 250px;
